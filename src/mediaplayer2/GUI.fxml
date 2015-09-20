@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mediaplayer2.GUIController">
+   <children>
+      <AnchorPane fx:id="npView" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: black;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fx:id="statusDisplay" disable="true" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#Play" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/status.png" />
+                     </image>
+                  </ImageView>
+                  <Pane fx:id="display" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#Play" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" StackPane.alignment="CENTER" />
+                  <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" onMouseClicked="#Play" />
+               </children>
+            </StackPane>
+            <ImageView fx:id="btgMain" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#gotoMain" onMouseEntered="#btgoMChange1" onMouseExited="#btgoMChange2" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../icon/Go_button/goM.png" />
+               </image></ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mView" layoutY="40.0" style="-fx-background-color: #cfe7f2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar prefHeight="25.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="OpenFile">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#Close" text="Close">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#Exit" text="Exit">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="A" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#deleteList" text="Clear List">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+            <VBox alignment="CENTER" layoutX="20.0" prefHeight="430.0" prefWidth="372.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="40.0">
+               <children>
+                  <ListView fx:id="listView" editable="true" fixedCellSize="-10.0" opacity="0.8" prefHeight="350.0" prefWidth="281.0" stylesheets="@CSS.css" VBox.vgrow="NEVER" />
+               </children>
+               <padding>
+                  <Insets bottom="80.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutX="403.0" prefHeight="350.0" prefWidth="217.0" spacing="20.0" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="178.0" prefWidth="217.0">
+                     <children>
+                        <ImageView fx:id="albumCover" fitHeight="195.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../icon/defaultAlbum.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <GridPane alignment="CENTER" hgap="10.0" prefHeight="195.0" prefWidth="233.0" vgap="5.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="ALWAYS" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="51.0" text="Year:" textAlignment="JUSTIFY" GridPane.rowIndex="3">
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="51.0" text="Artist:" textAlignment="JUSTIFY" GridPane.rowIndex="2">
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="51.0" text="Album:" textAlignment="JUSTIFY" GridPane.rowIndex="1">
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="albumDis" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="artistDis" contentDisplay="CENTER" prefHeight="20.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="yearDis" contentDisplay="CENTER" prefHeight="20.0" prefWidth="132.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="albumDis" contentDisplay="CENTER" layoutX="94.0" layoutY="12.0" prefHeight="20.0" prefWidth="158.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="51.0" text="Title:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="titleDis" contentDisplay="CENTER" lineSpacing="1.0" prefHeight="17.0" prefWidth="179.0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </GridPane>
+                  <HBox alignment="TOP_RIGHT" prefHeight="99.0" prefWidth="217.0" />
+               </children>
+               <padding>
+                  <Insets top="2.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" layoutY="396.0" prefHeight="32.0" prefWidth="155.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <VBox alignment="TOP_CENTER" layoutY="382.0" prefHeight="76.0" prefWidth="657.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <StackPane prefHeight="30.0" prefWidth="640.0">
+               <children>
+                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="0.0" stylesheets="@CSS.css" />
+                  <Slider fx:id="timeSlider" mouseTransparent="true" onMousePressed="#handleProgress" prefHeight="14.0" prefWidth="605.0" stylesheets="@CSS.css" />
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </StackPane>
+            <VBox alignment="CENTER" prefHeight="112.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="657.0" spacing="2.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <GridPane hgap="3.0" prefHeight="62.0" prefWidth="499.0">
+                           <columnConstraints>
+                              <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label fx:id="timeProgress" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="100.0" text="00:00/00:00" textAlignment="JUSTIFY" />
+                              <ImageView fx:id="nextButton" fitHeight="50.0" fitWidth="50.0" layoutX="307.0" layoutY="34.0" onMouseClicked="#Foward" onMouseEntered="#btnextChange1" onMouseExited="#btnextChange2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+                                 <image>
+                                    <Image url="@../icon/RewardPrevious_button/next.png" />
+                                 </image>
+                              </ImageView>
+                              <StackPane prefHeight="80.0" prefWidth="83.0" GridPane.columnIndex="7">
+                                 <children>
+                                    <ProgressBar fx:id="volumeBar" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="1.0" stylesheets="@CSS.css">
+                                       <padding>
+                                          <Insets right="30.0" />
+                                       </padding></ProgressBar>
+                                    <Slider fx:id="volumeSlider" max="1.0" mouseTransparent="true" prefHeight="14.0" prefWidth="66.0" stylesheets="@CSS.css" value="1.0">
+                                       <padding>
+                                          <Insets right="30.0" />
+                                       </padding></Slider>
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                              </StackPane>
+                              <ImageView fx:id="volumeButton" fitHeight="32.0" fitWidth="32.0" layoutX="360.0" layoutY="34.0" onMouseClicked="#setVolume" onMouseEntered="#btvolumeChange1" onMouseExited="#btvolumeChange2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                                 <image>
+                                    <Image url="@../icon/Volume_button/volume.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="backButton" fitHeight="30.0" fitWidth="50.0" onMouseClicked="#Previous" onMouseEntered="#btbackChange1" onMouseExited="#btbackChange2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                                 <image>
+                                    <Image url="@../icon/RewardPrevious_button/previous.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="repeatButton" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#Repeat" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <image>
+                                    <Image url="@../icon/Replay_button/replay.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="2.0" right="10.0" />
+                                 </HBox.margin>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </GridPane.margin>
+                              </ImageView>
+                              <ImageView fx:id="playButton" fitHeight="57.0" fitWidth="57.0" layoutX="323.0" layoutY="34.0" onMouseClicked="#Play" onMouseEntered="#btplayChange1" onMouseExited="#btplayChange2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                                 <image>
+                                    <Image url="@../icon/PlayPause_button/play.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="stopButton" fitHeight="32.0" fitWidth="32.0" layoutX="205.0" layoutY="34.0" onMouseClicked="#Stop" onMouseEntered="#btstopChange1" onMouseExited="#btstopChange2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                 <image>
+                                    <Image url="@../icon/Stop_button/stop.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                        </GridPane>
+                     </children></HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="589.0" prefHeight="62.0" prefWidth="51.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <ImageView fx:id="btnPaFull" fitHeight="32.0" fitWidth="76.0" onMouseClicked="#gotoNP" onMouseEntered="#btgoNPChange1" onMouseExited="#btgoNPChange2" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+               <image>
+                  <Image url="@../icon/Go_button/goNP.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
